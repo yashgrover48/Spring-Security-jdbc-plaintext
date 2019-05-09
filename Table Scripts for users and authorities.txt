@@ -1,0 +1,32 @@
+CREATE TABLE users(
+	username varchar(50) NOT NULL PRIMARY KEY,
+	password varchar(50) NOT NULL,
+	enabled tinyint NOT NULL
+);
+
+INSERT INTO users values('john','test1234',1);
+INSERT INTO users values('mary','test1234',1);
+INSERT INTO users values('susan','test1234',1);
+
+SELECT * FROM users;
+
+DELETE FROM users;
+
+
+
+
+
+CREATE TABLE authorities(
+	username varchar(50) NOT NULL,
+	authority varchar(50) NOT NULL,
+	CONSTRAINT authorities_idx_1 UNIQUE(username,authority),
+	CONSTRAINT authorities_ibfk_1 FOREIGN KEY(username) REFERENCES users (username)
+);
+
+select * from authorities;
+
+INSERT INTO authorities VALUES('john','ROLE_EMPLOYEE');
+INSERT INTO authorities VALUES('mary','ROLE_EMPLOYEE');
+INSERT INTO authorities VALUES('mary','ROLE_MANAGER');
+INSERT INTO authorities VALUES('susan','ROLE_EMPLOYEE');
+INSERT INTO authorities VALUES('susan','ROLE_ADMIN');
